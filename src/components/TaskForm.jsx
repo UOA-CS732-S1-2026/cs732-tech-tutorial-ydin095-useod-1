@@ -1,11 +1,29 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-function TaskForm({ onAddTask, subjects, onAddSubject }) {
+function TaskForm({ onAddTask, subjects, onAddSubject, editingTask, onEditTask, onCancelEdit }) {
   const [title, setTitle] = useState('')
   const [subject, setSubject] = useState(subjects.length > 0 ? subjects[0] : '')
   const [dueDate, setDueDate] = useState('')
   const [priority, setPriority] = useState('medium')
   const [newSubject, setNewSubject] = useState('')
+
+  useEffect(() => {
+    if (editingTask) {
+      setTitle(editingTask.title)
+      setSubject(editingTask.subject)
+      setDueDate(editingTask.dueDate)
+      setPriority(editingTask.priority)
+    } else {
+      resetForm()
+    }
+  }, [editingTask])
+
+  function resetForm() {
+    setTitle('')
+    setSubject(subjects.length > 0 ? subjects[0] : '')
+    setDueDate('')
+    setPriority('medium')
+  }
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -14,17 +32,20 @@ function TaskForm({ onAddTask, subjects, onAddSubject }) {
       return
     }
 
-    onAddTask({
+    const taskData = {
       title,
       subject,
       dueDate,
       priority,
-    })
+    }
 
-    setTitle('')
-    setSubject(subjects.length > 0 ? subjects[0] : '')
-    setDueDate('')
-    setPriority('medium')
+    if (editingTask) {
+      onEditTask(editingTask.id, taskData)
+    } else {
+      onAddTask(taskData)
+    }
+
+    resetForm()
   }
 
   function handleAddSubject() {
@@ -37,7 +58,7 @@ function TaskForm({ onAddTask, subjects, onAddSubject }) {
 
   return (
     <section className="section-card">
-      <h2>Add study task</h2>
+      <h2>{editingTask ? 'Edit task' : 'Add study task'}</h2>
 
       <form className="task-form" onSubmit={handleSubmit}>
         <label>
@@ -129,8 +150,21 @@ function TaskForm({ onAddTask, subjects, onAddSubject }) {
         </label>
 
         <button className="primary-btn" type="submit">
-          Add task
+          {editingTask ? 'Update task' : 'Add task'}
         </button>
+        
+        {editingTask && (
+          <button 
+            className="secondary-btn" 
+            type="button"
+            onClick={() => {
+              resetForm()
+              onCancelEdit()
+            }}
+          >
+            Cancel
+          </button>
+        )}
       </form>
     </section>
   )

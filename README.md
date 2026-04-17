@@ -22,6 +22,7 @@ Stop juggling multiple subjects, deadlines, and priorities. The **Study Planner*
 
 ### **Task Management**
 - ✅ Create, edit, and organize study tasks effortlessly
+- ✏️ Edit existing tasks with one click
 - 🏷️ Assign custom subjects (or choose from preset options)
 - 📅 Set intelligent due dates with deadline alerts
 - 🎚️ Prioritize tasks (High, Medium, Low)
@@ -34,6 +35,7 @@ Stop juggling multiple subjects, deadlines, and priorities. The **Study Planner*
 - 💡 Study tips & progress insights
 - 📈 Subject breakdown analytics
 - ⏱️ Estimated study time tracking
+- 📅 Weekly task view with date grouping
 
 ### **Intelligence & Feedback**
 - ⚠️ Overdue task highlighting
@@ -94,11 +96,11 @@ ai-study-planner/
 ├── src/
 │   ├── components/
 │   │   ├── FilterBar.jsx         # Subject & priority filtering
-│   │   ├── TaskForm.jsx          # Create new tasks with priority
-│   │   ├── TaskItem.jsx          # Individual task rendering
+│   │   ├── TaskForm.jsx          # Create & edit tasks with priority
+│   │   ├── TaskItem.jsx          # Individual task rendering with edit button
 │   │   ├── TaskList.jsx          # Task list container
 │   │   ├── StudySidebar.jsx      # Analytics & insights dashboard
-│   │   ├── WeeklyPlanning.jsx    # Weekly view (future)
+│   │   ├── WeeklyPlanning.jsx    # Weekly view with date grouping
 │   │   └── Toast.jsx             # Success notifications
 │   ├── App.jsx                   # Main app component & logic
 │   ├── App.css                   # Polished styling
@@ -119,6 +121,13 @@ ai-study-planner/
 4. **Priority**: Choose High, Medium, or Low
 5. Hit **"Add task"** and watch it appear in your list!
 
+### Editing a Task
+1. Click the **"Edit"** button on any task card
+2. The form will populate with the task details
+3. Make your changes to title, subject, due date, or priority
+4. Click **"Update task"** to save changes
+5. Or click **"Cancel"** to discard changes
+
 ### Filtering & Organization
 - Use the **status filters** to focus on pending or completed tasks
 - **Sort by subject** to see all tasks in one area
@@ -130,6 +139,7 @@ ai-study-planner/
 - See **study time estimates** for planning
 - View **subject breakdowns** to identify weak areas
 - Get daily **productivity tips** for better studying
+- View this **week's tasks** in the weekly planner
 
 ---
 
@@ -178,7 +188,7 @@ Every pixel is intentional. Every interaction feels responsive.
 
 ## 📝 Feature Roadmap
 
-- [ ] 📅 Weekly planning view with calendar
+- [x] 📅 Weekly planning view with calendar
 - [ ] 🔄 Recurring tasks support
 - [ ] 🏆 Achievement badges & streaks
 - [ ] 📊 Advanced analytics dashboard

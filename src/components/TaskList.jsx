@@ -1,6 +1,6 @@
 import TaskItem from './TaskItem'
 
-function TaskList({ tasks, onToggleTask, onDeleteTask }) {
+function TaskList({ tasks, onToggleTask, onDeleteTask, onEditTask, editingTask }) {
   return (
     <section className="section-card">
       <div className="list-header">
@@ -20,6 +20,8 @@ function TaskList({ tasks, onToggleTask, onDeleteTask }) {
               task={task}
               onToggleTask={onToggleTask}
               onDeleteTask={onDeleteTask}
+              onEditTask={onEditTask}
+              isEditing={editingTask?.id === task.id}
             />
           ))}
         </div>

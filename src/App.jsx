@@ -4,6 +4,7 @@ import FilterBar from './components/FilterBar'
 import TaskList from './components/TaskList'
 import StudySidebar from './components/StudySidebar'
 import Toast from './components/Toast'
+import WeeklyPlanning from './components/WeeklyPlanning'
 
 const STORAGE_KEY = 'ai-study-planner-tasks'
 const SUBJECTS_STORAGE_KEY = 'ai-study-planner-subjects'
@@ -46,6 +47,7 @@ function App() {
   const [subjectFilter, setSubjectFilter] = useState('all')
   const [priorityFilter, setPriorityFilter] = useState('all')
   const [toast, setToast] = useState(null)
+  const [editingTask, setEditingTask] = useState(null)
   const [subjects, setSubjects] = useState(() => {
     const saved = localStorage.getItem(SUBJECTS_STORAGE_KEY)
     if (saved) {
@@ -97,6 +99,18 @@ function App() {
   function deleteTask(taskId) {
     setTasks((currentTasks) => currentTasks.filter((task) => task.id !== taskId))
     setToast({ message: 'Task deleted successfully!', type: 'success' })
+  }
+
+  function editTask(taskId, updatedData) {
+    setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === taskId
+          ? { ...task, ...updatedData }
+          : task,
+      ),
+    )
+    setEditingTask(null)
+    setToast({ message: 'Task updated successfully!', type: 'success' })
   }
 
   const filteredTasks = useMemo(() => {
@@ -158,7 +172,14 @@ function App() {
             </div>
           </section>
 
-          <TaskForm onAddTask={addTask} subjects={subjects} onAddSubject={addSubject} />
+          <TaskForm 
+            onAddTask={addTask} 
+            subjects={subjects} 
+            onAddSubject={addSubject}
+            editingTask={editingTask}
+            onEditTask={editTask}
+            onCancelEdit={() => setEditingTask(null)}
+          />
 
           <FilterBar 
             currentFilter={filter} 
@@ -174,7 +195,11 @@ function App() {
             tasks={filteredTasks}
             onToggleTask={toggleTask}
             onDeleteTask={deleteTask}
+            onEditTask={setEditingTask}
+            editingTask={editingTask}
           />
+
+          <WeeklyPlanning tasks={tasks} />
         </div>
 
         <StudySidebar tasks={tasks} />

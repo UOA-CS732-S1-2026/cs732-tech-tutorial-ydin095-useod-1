@@ -31,7 +31,7 @@ function getDueStatus(dueDate, completed) {
   return null
 }
 
-function TaskItem({ task, onToggleTask, onDeleteTask }) {
+function TaskItem({ task, onToggleTask, onDeleteTask, onEditTask }) {
   const dueStatus = getDueStatus(task.dueDate, task.completed)
   const priorityClass = `priority-${task.priority}`
   const statusClass = dueStatus ? `status-${dueStatus.type}` : ''
@@ -65,6 +65,14 @@ function TaskItem({ task, onToggleTask, onDeleteTask }) {
           onClick={() => onToggleTask(task.id)}
         >
           {task.completed ? 'Mark pending' : 'Mark complete'}
+        </button>
+
+        <button
+          type="button"
+          className="secondary-btn"
+          onClick={() => onEditTask(task)}
+        >
+          Edit
         </button>
 
         <button
