@@ -1,6 +1,6 @@
 # 📚 AI-Assisted React Study Planner
 
-> **Organize your study chaos, one task at a time.** A beautifully crafted React study planner that helps you stay focused, productive, and on top of your academic goals—all while demonstrating modern web development practices.
+> A beautifully crafted React study planner that helps you organize tasks, track progress, and stay productive.
 
 <div align="center">
 
@@ -12,235 +12,111 @@
 
 ---
 
-## ✨ Why This Project?
-
-Stop juggling multiple subjects, deadlines, and priorities. The **Study Planner** brings clarity to your academic workflow with an intuitive interface, intelligent task management, and real-time insights. Built as a showcase of modern React patterns and AI-assisted development.
-
----
-
 ## 🎯 Key Features
 
-### **Task Management**
-- ✅ Create, edit, and organize study tasks effortlessly
-- ✏️ Edit existing tasks with one click
-- 🏷️ Assign custom subjects (or choose from preset options)
-- 📅 Set intelligent due dates with deadline alerts
-- 🎚️ Prioritize tasks (High, Medium, Low)
-
-### **Smart Filtering & Insights**
-- 🔍 Filter by status (All, Pending, Completed)
-- 🏫 Sort by subject area
-- 🚨 Filter by priority level
-- 📊 Real-time completion statistics
-- 💡 Study tips & progress insights
-- 📈 Subject breakdown analytics
-- ⏱️ Estimated study time tracking
-- 📅 Weekly task view with date grouping
-
-### **Intelligence & Feedback**
-- ⚠️ Overdue task highlighting
-- 🔔 Due soon notifications
-- ✨ Success feedback with toast notifications
-- 🎨 Task status visual indicators
-
-### **Always-On Availability**
-- 💾 Automatic localStorage persistence
-- 🚀 Instant task loading on app start
-- 📱 Fully responsive design (mobile, tablet, desktop)
+- ✅ **Create, edit, delete** study tasks effortlessly
+- 🏷️ **Custom subjects** - add your own or use presets
+- 📅 **Due dates** with intelligent deadline alerts
+- 🎚️ **Priorities** - High, Medium, Low
+- 🔍 **Smart filtering** by status, subject, and priority
+- 📊 **Real-time stats** - completion rate, study time, subject breakdown
+- ⚠️ **Visual alerts** - overdue highlighting, due soon notifications
+- 📅 **Weekly view** - see this week's tasks grouped by date
+- 💾 **Auto-save** - localStorage keeps all data between sessions
+- 📱 **Responsive design** - works on mobile, tablet, desktop
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Technology | Purpose |
-|-----------|---------|
-| **React 18+** | Modern UI framework with hooks |
-| **Vite** | Lightning-fast build & dev experience |
-| **CSS3** | Beautiful gradients, animations & layouts |
-| **localStorage** | Client-side data persistence |
-| **ES6+** | Modern JavaScript features |
+- **React 18+** - Modern UI with hooks
+- **Vite** - Fast build & dev server
+- **CSS3** - Gradients, animations, responsive layouts
+- **localStorage** - Client-side data persistence
 
 ---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Node.js 14+ installed
-- npm or yarn package manager
-
-### Installation & Setup
-
 ```bash
-# 1️⃣ Clone or download the project
-cd ai-study-planner
-
-# 2️⃣ Install dependencies
+# 1. Install dependencies
 npm install
 
-# 3️⃣ Start the development server
+# 2. Start dev server
 npm run dev
 
-# 4️⃣ Open in your browser
-# The terminal will show: ➜ Local: http://localhost:5173
-# Copy and paste that URL into your browser!
+# 3. Open http://localhost:5173 in your browser
 ```
 
-That's it! Your study planner is ready to use. 🎉
+That's it! 🎉
+
+---
+
+## 💡 How to Use
+
+### Add a Task
+1. Enter task **title** (e.g., "Review React notes")
+2. Select **subject** (Web Dev, Maths, etc.) or add a new one
+3. Set **due date**
+4. Choose **priority** (Low, Medium, High)
+5. Click **"Add task"**
+
+### Edit a Task
+1. Click the **"Edit"** button on any task
+2. Update the details
+3. Click **"Update task"** to save
+
+### Manage Tasks
+- **Mark complete/pending** - Toggle completion status
+- **Delete** - Remove tasks you no longer need
+- **Filter** - By status, subject, or priority
+- **View weekly** - See all tasks due this week
+
+### Track Progress
+- **Completion rate** on sidebar
+- **Study time estimate** for planning
+- **Subject breakdown** to spot weak areas
+- **Study tips** for better productivity
 
 ---
 
 ## 📂 Project Structure
 
 ```
-ai-study-planner/
-├── src/
-│   ├── components/
-│   │   ├── FilterBar.jsx         # Subject & priority filtering
-│   │   ├── TaskForm.jsx          # Create & edit tasks with priority
-│   │   ├── TaskItem.jsx          # Individual task rendering with edit button
-│   │   ├── TaskList.jsx          # Task list container
-│   │   ├── StudySidebar.jsx      # Analytics & insights dashboard
-│   │   ├── WeeklyPlanning.jsx    # Weekly view with date grouping
-│   │   └── Toast.jsx             # Success notifications
-│   ├── App.jsx                   # Main app component & logic
-│   ├── App.css                   # Polished styling
-│   └── main.jsx                  # React entry point
-├── index.html
-├── package.json
-└── vite.config.js
+src/
+├── components/
+│   ├── TaskForm.jsx          # Add & edit tasks
+│   ├── TaskItem.jsx          # Single task display
+│   ├── TaskList.jsx          # All tasks
+│   ├── FilterBar.jsx         # Filtering options
+│   ├── StudySidebar.jsx      # Analytics & insights
+│   ├── WeeklyPlanning.jsx    # Weekly task view
+│   ├── Toast.jsx             # Notifications
+│   └── FilterBar.jsx         # Status filters
+├── App.jsx                   # Main component
+├── App.css                   # Styling
+└── main.jsx                  # Entry point
 ```
 
 ---
 
-## 💡 How to Use
+## 📝 Features Checklist
 
-### Adding a Task
-1. **Title**: "Review lecture slides" or any study goal
-2. **Subject**: Pick from Web Dev, Maths, Physics... or add your own!
-3. **Due Date**: Select when you need to complete it
-4. **Priority**: Choose High, Medium, or Low
-5. Hit **"Add task"** and watch it appear in your list!
-
-### Editing a Task
-1. Click the **"Edit"** button on any task card
-2. The form will populate with the task details
-3. Make your changes to title, subject, due date, or priority
-4. Click **"Update task"** to save changes
-5. Or click **"Cancel"** to discard changes
-
-### Filtering & Organization
-- Use the **status filters** to focus on pending or completed tasks
-- **Sort by subject** to see all tasks in one area
-- **Filter by priority** to tackle urgent items first
-- Watch the **sidebar** update with live statistics
-
-### Tracking Progress
-- Check your **completion rate** on the sidebar
-- See **study time estimates** for planning
-- View **subject breakdowns** to identify weak areas
-- Get daily **productivity tips** for better studying
-- View this **week's tasks** in the weekly planner
-
----
-
-## 🧠 Perfect For Learning
-
-This project is an **excellent learning resource** and demonstrates:
-
-### React Concepts
-- ✅ Functional components with hooks (`useState`, `useEffect`)
-- ✅ Component composition & reusability
-- ✅ Props drilling & state management
-- ✅ Array methods & filtering logic
-- ✅ Event handling & form management
-- ✅ Conditional rendering & key management
-
-### Web Development Best Practices
-- ✅ Responsive design (mobile-first approach)
-- ✅ CSS Grid & Flexbox layouts
-- ✅ Modern CSS (gradients, shadows, animations)
-- ✅ Semantic HTML structure
-- ✅ Performance optimization with `useMemo`
-
-### AI-Assisted Development
-- 💻 **Planning**: Use AI to architecture components
-- 💻 **Generation**: Let AI create starter code
-- 💻 **Debugging**: Get help fixing state issues
-- 💻 **Documentation**: AI-powered README creation
-- 💻 **Refactoring**: Improve code quality with suggestions
-
----
-
-## 🎨 Design Philosophy
-
-**Clean. Minimal. Powerful.**
-
-The interface uses:
-- **Gradient backgrounds** for visual depth
-- **Subtle shadows** for hierarchy
-- **Color psychology** (red for urgent, green for complete)
-- **Smooth animations** for delightful interactions
-- **Consistent spacing** throughout
-
-Every pixel is intentional. Every interaction feels responsive.
-
----
-
-## 📝 Feature Roadmap
-
-- [x] 📅 Weekly planning view with calendar
-- [ ] 🔄 Recurring tasks support
-- [ ] 🏆 Achievement badges & streaks
-- [ ] 📊 Advanced analytics dashboard
-- [ ] 🌙 Dark mode toggle
-- [ ] 🔔 Browser push notifications
-- [ ] 📤 Export tasks as PDF
-- [ ] 👥 Collaborative features
-- [ ] ☁️ Cloud sync option
-
----
-
-## 🤝 Contributing
-
-Found a bug? Have an idea? Want to improve the UI?
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
----
-
-## 📚 Learning Resources
-
-- **React Docs**: https://react.dev
-- **Vite Guide**: https://vitejs.dev/guide/
-- **CSS Grid**: https://css-tricks.com/snippets/css/complete-guide-grid/
-- **localStorage**: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-
----
-
-## 💬 Feedback & Support
-
-Have questions? Found an issue? Suggestions for improvements?
-
-- 📧 Create an issue on GitHub
-- 💭 Start a discussion
-- 🐛 Report bugs with details
+- [x] Create tasks
+- [x] Edit tasks
+- [x] Delete tasks
+- [x] Filter by status/subject/priority
+- [x] Due date alerts
+- [x] Weekly planner
+- [x] Auto-save to localStorage
+- [x] Custom subjects
+- [x] Progress tracking
+- [ ] Dark mode
+- [ ] Cloud sync
+- [ ] Export to PDF
 
 ---
 
 ## 📄 License
 
-This project is open-source and available under the **MIT License**. Feel free to use it for learning, teaching, or inspiration!
-
----
-
-<div align="center">
-
-**Made with 💜 by the CS732 Lab Community**
-
-⭐ If this helped you, please star this repository!
-
-</div>
+MIT License - Feel free to use for learning and projects!
