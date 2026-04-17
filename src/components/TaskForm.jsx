@@ -4,6 +4,7 @@ function TaskForm({ onAddTask, subjects, onAddSubject }) {
   const [title, setTitle] = useState('')
   const [subject, setSubject] = useState(subjects.length > 0 ? subjects[0] : '')
   const [dueDate, setDueDate] = useState('')
+  const [priority, setPriority] = useState('medium')
   const [newSubject, setNewSubject] = useState('')
 
   function handleSubmit(event) {
@@ -17,11 +18,13 @@ function TaskForm({ onAddTask, subjects, onAddSubject }) {
       title,
       subject,
       dueDate,
+      priority,
     })
 
     setTitle('')
     setSubject(subjects.length > 0 ? subjects[0] : '')
     setDueDate('')
+    setPriority('medium')
   }
 
   function handleAddSubject() {
@@ -71,6 +74,33 @@ function TaskForm({ onAddTask, subjects, onAddSubject }) {
             />
           </label>
         </div>
+
+        <label>
+          Priority
+          <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+            <button
+              type="button"
+              className={priority === 'low' ? 'priority-btn active' : 'priority-btn'}
+              onClick={() => setPriority('low')}
+            >
+              Low
+            </button>
+            <button
+              type="button"
+              className={priority === 'medium' ? 'priority-btn active' : 'priority-btn'}
+              onClick={() => setPriority('medium')}
+            >
+              Medium
+            </button>
+            <button
+              type="button"
+              className={priority === 'high' ? 'priority-btn active' : 'priority-btn'}
+              onClick={() => setPriority('high')}
+            >
+              High
+            </button>
+          </div>
+        </label>
 
         <label>
           Add new subject

@@ -2,12 +2,11 @@ import { useEffect, useMemo, useState } from 'react'
 import TaskForm from './components/TaskForm'
 import FilterBar from './components/FilterBar'
 import TaskList from './components/TaskList'
-import StudyInsights from './components/StudyInsights'
+import StudySidebar from './components/StudySidebar'
+import Toast from './components/Toast'
 
 const STORAGE_KEY = 'ai-study-planner-tasks'
 const SUBJECTS_STORAGE_KEY = 'ai-study-planner-subjects'
-
-const starterSubjects = ['Web Dev', 'Maths', 'CS', 'Essay', 'Revision']
 
 const starterTasks = [
   {
@@ -15,6 +14,7 @@ const starterTasks = [
     title: 'Read React notes',
     subject: 'Web Dev',
     dueDate: '',
+    priority: 'medium',
     completed: false,
     createdAt: Date.now(),
   },
@@ -23,6 +23,7 @@ const starterTasks = [
     title: 'Finish maths exercises',
     subject: 'Maths',
     dueDate: '',
+    priority: 'high',
     completed: true,
     createdAt: Date.now(),
   },
@@ -41,6 +42,10 @@ function App() {
     return starterTasks
   })
 
+  const [filter, setFilter] = useState('all')
+  const [subjectFilter, setSubjectFilter] = useState('all')
+  const [priorityFilter, setPriorityFilter] = useState('all')
+  const [toast, setToast] = useState(null)
   const [subjects, setSubjects] = useState(() => {
     const saved = localStorage.getItem(SUBJECTS_STORAGE_KEY)
     if (saved) {
@@ -50,10 +55,8 @@ function App() {
         console.error('Failed to parse saved subjects:', error)
       }
     }
-    return starterSubjects
+    return ['Web Dev', 'Maths']
   })
-
-  const [filter, setFilter] = useState('all')
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks))
@@ -63,12 +66,19 @@ function App() {
     localStorage.setItem(SUBJECTS_STORAGE_KEY, JSON.stringify(subjects))
   }, [subjects])
 
+  function addSubject(newSubject) {
+    if (!subjects.includes(newSubject)) {
+      setSubjects([...subjects, newSubject])
+    }
+  }
+
   function addTask(taskData) {
     const newTask = {
       id: crypto.randomUUID(),
       title: taskData.title.trim(),
       subject: taskData.subject,
       dueDate: taskData.dueDate,
+      priority: taskData.priority || 'medium',
       completed: false,
       createdAt: Date.now(),
     }
@@ -86,25 +96,31 @@ function App() {
 
   function deleteTask(taskId) {
     setTasks((currentTasks) => currentTasks.filter((task) => task.id !== taskId))
-  }
-
-  function addSubject(newSubject) {
-    if (newSubject && !subjects.includes(newSubject)) {
-      setSubjects((currentSubjects) => [...currentSubjects, newSubject])
-    }
+    setToast({ message: 'Task deleted successfully!', type: 'success' })
   }
 
   const filteredTasks = useMemo(() => {
+    let result = tasks
+
+    // Filter by status (all/pending/completed)
     if (filter === 'pending') {
-      return tasks.filter((task) => !task.completed)
+      result = result.filter((task) => !task.completed)
+    } else if (filter === 'completed') {
+      result = result.filter((task) => task.completed)
     }
 
-    if (filter === 'completed') {
-      return tasks.filter((task) => task.completed)
+    // Filter by subject
+    if (subjectFilter !== 'all') {
+      result = result.filter((task) => task.subject === subjectFilter)
     }
 
-    return tasks
-  }, [tasks, filter])
+    // Filter by priority
+    if (priorityFilter !== 'all') {
+      result = result.filter((task) => task.priority === priorityFilter)
+    }
+
+    return result
+  }, [tasks, filter, subjectFilter, priorityFilter])
 
   const taskStats = useMemo(() => {
     const total = tasks.length
@@ -144,7 +160,15 @@ function App() {
 
           <TaskForm onAddTask={addTask} subjects={subjects} onAddSubject={addSubject} />
 
-          <FilterBar currentFilter={filter} onChangeFilter={setFilter} />
+          <FilterBar 
+            currentFilter={filter} 
+            onChangeFilter={setFilter}
+            currentSubjectFilter={subjectFilter}
+            onChangeSubjectFilter={setSubjectFilter}
+            currentPriorityFilter={priorityFilter}
+            onChangePriorityFilter={setPriorityFilter}
+            tasks={tasks}
+          />
 
           <TaskList
             tasks={filteredTasks}
@@ -153,8 +177,16 @@ function App() {
           />
         </div>
 
-        <StudyInsights tasks={tasks} subjects={subjects} />
+        <StudySidebar tasks={tasks} />
       </div>
+
+      {toast && (
+        <Toast 
+          message={toast.message} 
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   )
 }
